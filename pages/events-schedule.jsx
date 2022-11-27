@@ -18,9 +18,8 @@ export default function EventsSchedulePage({navigation}) {
             console.log('fetched: ' + getEventsFromApi().toString())
             
             let events = getEventsFromApi();
-            // events.forEach(element => {
-            //     console.log('213');
-            //     //SECTIONS[0].data[0] = 
+            // events.forEach(element => {   
+            //     setListOfItems.apply(element)
             // });
         });
     
@@ -49,7 +48,7 @@ export default function EventsSchedulePage({navigation}) {
               text: ' \«Лопни лженауку\»',
               type: 'Научный челлендж',
               when: 'В течении Февраля',
-              description: 'Описание события',
+              description: 'В мероприятие вовлекаются студенты, аспиранты, преподаватели и администрация ВУЗа',
               uri: 'https://picsum.photos/id/1/200',
             },
             {

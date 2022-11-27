@@ -16,7 +16,7 @@ export default function EntryPage({navigation}) {
         <Image source={require('../assets/entry-text.png')} style={{marginTop: 70, marginLeft: '20%'}}/>
         <MainButton text='Регистрация' style={{marginTop: 270,}} onPress={() => navigation.navigate('LogIn')}/>
         <Text style={[globalStyle.text, {alignSelf: 'center', marginTop: 20}]}>У вас уже есть учетная запись?</Text>
-        <TouchableOpacity style={{marginTop: 1, alignSelf: 'center'}} onPress={() => navigation.navigate('LogIn')}>
+        <TouchableOpacity style={{marginTop: 10, alignSelf: 'center'}} onPress={() => navigation.navigate('LogIn')}>
             <Image source={require('../assets/log-in.png')}/>
         </TouchableOpacity>
         </ImageBackground>
