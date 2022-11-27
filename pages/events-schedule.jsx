@@ -20,8 +20,6 @@ export default function EventsSchedulePage({navigation}) {
             <Image style={{marginTop: 5}} source={require('../assets/search.png')}/>
 
         </View>
-
-
          <SectionList
           contentContainerStyle={{ paddingHorizontal: 10 }}
           stickySectionHeadersEnabled={false}
@@ -33,7 +31,7 @@ export default function EventsSchedulePage({navigation}) {
                 <FlatList
                   horizontal
                   data={section.data}
-                  renderItem={({ item }) => <EventListItem item={item} />}
+                  renderItem={({ item }) => <EventListItem item={item}/>}
                   showsHorizontalScrollIndicator={false}
                 />
               ) : null}
@@ -46,7 +44,6 @@ export default function EventsSchedulePage({navigation}) {
             return <EventListItem item={item} />;
           }}
         />
-        <Text style={globalStyle.text}>schedule page</Text>
       </SafeAreaView>
       <NavigationFooter navigation={navigation}/>
       </View>
@@ -75,22 +72,28 @@ const styles = StyleSheet.create({
 
 const SECTIONS = [
     {
-      title: 'Январь',
+      title: 'Февраль',
       horizontal: false,
       data: [
         {
           key: '1',
-          text: 'Item text 1',
+          text: ' \«Лопни лженауку\»',
+          type: 'Научный челлендж',
+          when: 'В течении Февраля',
+          description: 'Описание события',
           uri: 'https://picsum.photos/id/1/200',
         },
         {
           key: '2',
           text: 'Item text 2',
+          type: 'Научный челлендж',
+          when: '10.02',
+          description: 'Описание события',
           uri: 'https://picsum.photos/id/10/200',
         },]
     },
     {
-        title: 'Февраль',
+        title: 'Март',
         horizontal: false,
         data: [
           {

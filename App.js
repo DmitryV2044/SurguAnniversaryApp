@@ -10,6 +10,7 @@ import SettingsPage from './pages/settings-page';
 import MapPage from './pages/map-page';
 
 import HomePage from './pages/home-page';
+import EventPage from './pages/event-page';
 import EventsSchedulePage from './pages/events-schedule';
 import { StatusBar } from 'expo-status-bar';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -40,6 +41,7 @@ export default function App(){
           <Stack.Screen name="Settings" component={SettingsPage} />
           <Stack.Screen name="Map" component={MapPage} />
           <Stack.Screen name="Schedule" component={EventsSchedulePage} />
+          <Stack.Screen name="EventPage" component={EventPage} />
        </Stack.Navigator>
        
        </NavigationContainer>

@@ -6,3 +6,13 @@ export default function GetProfileImage(){
 export function GetProfileName(){
     return 'userName'
 }
+
+var dict = {};
+
+export function SetCurrentEventPageInfo(){
+    dict['event_name'] = 'Test';
+}
+
+export function GetCurrentEventPageInfo(){
+    return dict;
+}
