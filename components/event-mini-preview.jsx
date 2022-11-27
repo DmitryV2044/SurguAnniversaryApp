@@ -8,18 +8,14 @@ import {
   } from 'react-native';
 import { globalStyle } from '../styles/style';
   
-  export default function EventMiniPreview({onPress, text, style, source}){
+  export default function EventMiniPreview({onPress, text, style, source, imageStyle}){
   
-    function getSource(){
-        return 'https://lh3.googleusercontent.com/p68bvAqPWmKFyWYIghthNPoJLAG-1-JJ-B3ZXTrEhHAcCyQrrHx9goYwG_VJGjwVf8Tlh4WLo7-478128wix8gGQOI22v5c3iYi4iqokGrS9IDy7yzjJ34QkMZYU3dr_y3sG6FN5=w2400'
-    }
-
       return(
         <View style={style}>
           <Text style={globalStyle.text_bold}>{text}</Text>
           <View style={styles.preview}>
             <TouchableOpacity onPress={onPress}>
-                <ImageBackground imageStyle={styles.image} source={{uri: getSource()}} >
+                <ImageBackground imageStyle={[styles.image, imageStyle]} source={source} >
                     <Image style={styles.playbutton} source={require('../assets/playbutton.png')}/>
                 </ImageBackground>
             </TouchableOpacity>
@@ -43,7 +39,7 @@ import { globalStyle } from '../styles/style';
         width: 170,
         borderRadius: 20,
         borderWidth: 2,
-        borderColor: 'red',
+        borderColor: '#616161',
         color: 'black',
        
       },

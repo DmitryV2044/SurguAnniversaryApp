@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, FlatList, Button, TouchableOpacity, Image} from 'react-native';
 import { globalStyle } from '../styles/style';
 import EntryPage from './entry-page';
@@ -12,6 +12,7 @@ import RecentsListItem from '../components/recents-list-item';
 import { createStackNavigator } from '@react-navigation/stack';
 import Notifications from './notifications';
 import NavigationFooter from '../components/nav-footer';
+//import { getMoviesFromApiAsync } from '../components/api-requests';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -20,6 +21,35 @@ export default function HomePage({navigation}) {
     function getUserImage(){
         return 'https://lh3.googleusercontent.com/azuVWnYtKD4D00SC7xLCnfBVJqKIZkuvvgIII27WeQnW-a1n0AFr7sdMN76DYsRGw_HcPT1CLIOp2pT98-_f0szBTetNQBshHndgsMqyk0CPxje-rdZYifEtrjY-V_bC9teh3XfT=w2400';
     }
+
+    function getNextEventImage(){
+        return 'https://lh3.googleusercontent.com/pw/AL9nZEWBEotEzBy9MCPCJ-qxFpjaFeX6CSn7CCNLGuO430fUPCjz7Xm4AefaH1XDZcAZhWNDcRTd3IBQ8Rj0fjmVMxcyr2wwlAwnjEGqToFDALHRFmHLig=w2400';
+    }
+    
+    function getNearestImage(){
+        return 'https://lh3.googleusercontent.com/p68bvAqPWmKFyWYIghthNPoJLAG-1-JJ-B3ZXTrEhHAcCyQrrHx9goYwG_VJGjwVf8Tlh4WLo7-478128wix8gGQOI22v5c3iYi4iqokGrS9IDy7yzjJ34QkMZYU3dr_y3sG6FN5=w2400'
+    }
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            console.log('focused page');
+        });
+    
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+      }, [navigation]);
+
+    async function getMoviesFromApi() {
+
+        try {
+          let response = await fetch('http://localhost:8888/request-events.php');
+          let responseJson = await response.json();
+          console.log('response: ' + responseJson[0].eventname);
+          return responseJson[0].id;
+         } catch(error) {
+          console.error(error);
+        }
+      }
 
     const [listOfPassedEvents, setListOfItems] = useState([
         {
@@ -76,13 +106,13 @@ export default function HomePage({navigation}) {
                 <Image source={{uri: getUserImage()}} style={styles.userImage}/>
             </View>
             <Text style={[globalStyle.text,{flexBasis: '50%', paddingTop: 10, textAlign: 'left'}]}>UserName</Text>
-            <NotificationButton style={{flexBasis: '10%', alignSelf: 'flex-start'}}/>
+            <NotificationButton style={{flexBasis: '10%', alignSelf: 'flex-start'}} onPress={() => getMoviesFromApi()}/>
             <ImageButton imageStyle={{height: 50, width:50 }} source={require('../assets/settings.png')} onPress={()=> navigation.navigate('Settings')} style={{flexBasis: '10%', paddingTop: 5, marginLeft: 20}}/>
         </View>
 
         <View style={{flexWrap: 'wrap', flexDirection: 'row', marginLeft: 20}}>
-            <EventMiniPreview text='Ближайшее' style={{flexBasis: '45%',}}/>
-            <EventMiniPreview text='Следующее' style={{flexBasis: '45%', paddingLeft: 30}}/>
+            <EventMiniPreview text='Ближайшее' style={{flexBasis: '45%',}}  imageStyle={{borderColor: '#7C6BFF'}} source={{uri: getNearestImage()}} />
+            <EventMiniPreview text='Следующее' style={{flexBasis: '45%', paddingLeft: 30}} source={{uri: getNextEventImage()}}/>
             
         </View>
 

@@ -42,8 +42,6 @@ const styles = StyleSheet.create({
   },
   header_view: {
     flexWrap: 'wrap', 
-    borderWidth: 2, 
-    borderColor: 'red',
     flexDirection: 'row', 
     width: '100%',
   },

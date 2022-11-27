@@ -17,14 +17,12 @@ export default function MapPage({navigation}) {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421, }}>
               <Marker coordinate={{latitude: 61.252800, longitude: 73.400429,}}>
-                <Callout onPress={() => navigation.navigate('HomePage')}>
+                <Callout onPress={() => navigation.navigate('EventPage')}>
                   <Text>Мероприятие 1</Text>
                 </Callout>
               </Marker>
             </MapView>
-    </View>
-          <Text style={globalStyle.text}>Map page</Text>
-        
+      </View>        
         </SafeAreaView> 
           <NavigationFooter navigation={navigation}/>
       </View>

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, Image, TextInput, Button} from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image, TextInput, Button, ScrollView} from 'react-native';
 import { globalStyle } from '../styles/style';
 import ReturnButton from '../components/return-button';
 import NavigationFooter from '../components/nav-footer';
@@ -25,20 +25,27 @@ export default function EventPage({navigation}) {
     return (
         <View style={globalStyle.fill}>
             <SafeAreaView style={globalStyle.main_view}>
-                <HeadWithText text='Программа мероприятия' onReturn={() => navigation.navigate('Schedule')}/>
-                <View>
-                    <YoutubePlayer
-                        height={250}
-                        play={playing}
-                        videoId={"Dx5qFachd3A"}
-                        onChangeState={onStateChange}
-                    />
-                </View>
-            <Text style={[globalStyle.text_bold, styles.title]}>Описание</Text>
-            <Text style={[globalStyle.text, styles.description]}>Ориентировано на внутреннюю среду университета.
-В мероприятие вовлекаются студенты и аспиранты.
-Конкурс студенческих фотографий на научные тематики проводится в онлайн, итоги подводятся голосованием в онлайн.По итогам конкурса победителям вручаются ценные подарки и дипломы.Организуется экспозиция для демонстрации лучших фоторабот студентов, фотозона</Text>
+            <HeadWithText text='Программа мероприятия' onReturn={() => navigation.navigate('Schedule')}/>
 
+                <ScrollView>
+                    <View>
+                        <YoutubePlayer
+                            height={250}
+                            play={playing}
+                            videoId={"Dx5qFachd3A"}
+                            onChangeState={onStateChange}
+                        />
+                    </View>
+                    <Text style={[globalStyle.text_bold, styles.title]}>Описание</Text>
+                    <Text style={[globalStyle.text, styles.description]}>Ориентировано на внутреннюю среду университета.
+                    В мероприятие вовлекаются студенты и аспиранты.
+                    Конкурс студенческих фотографий на научные тематики проводится в онлайн, итоги подводятся голосованием в онлайн.По итогам конкурса победителям вручаются ценные подарки и дипломы.Организуется экспозиция для демонстрации лучших фоторабот студентов, фотозона</Text>
+                    <Text style={[globalStyle.text_bold, styles.title, {paddingTop: 20,}]}>Место проведения</Text>
+                    <Text style={[globalStyle.text, styles.description]}>СурГУ</Text>
+                </ScrollView>
+                
+            
+            
             </SafeAreaView>
             <NavigationFooter navigation={navigation}/>
         </View>

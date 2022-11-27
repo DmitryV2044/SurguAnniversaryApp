@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState, forEach} from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Image, TextInput, SectionList, FlatList} from 'react-native';
 import { globalStyle } from '../styles/style';
 import ReturnButton from '../components/return-button';
@@ -10,6 +10,74 @@ import NavigationFooter from '../components/nav-footer';
 
 
 export default function EventsSchedulePage({navigation}) {
+
+    const [listOfItems, setListOfItems] = useState([]);
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            console.log('fetched: ' + getEventsFromApi().toString())
+            
+            let events = getEventsFromApi();
+            // events.forEach(element => {
+            //     console.log('213');
+            //     //SECTIONS[0].data[0] = 
+            // });
+        });
+    
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+      }, [navigation]);
+
+    async function getEventsFromApi() {
+        try {
+          let response = await fetch('http://localhost:8888/request-events.php');
+          let responseJson = await response.json();
+          console.log('response: ' + responseJson[0].eventname);
+          return responseJson;
+         } catch(error) {
+          console.error(error);
+        }
+      }
+
+      const SECTIONS = [
+        {
+          title: 'Февраль',
+          horizontal: false,
+          data: [
+            {
+              key: '1',
+              text: ' \«Лопни лженауку\»',
+              type: 'Научный челлендж',
+              when: 'В течении Февраля',
+              description: 'Описание события',
+              uri: 'https://picsum.photos/id/1/200',
+            },
+            {
+              key: '2',
+              text: 'Item text 2',
+              type: 'Научный челлендж',
+              when: '10.02',
+              description: 'Описание события',
+              uri: 'https://picsum.photos/id/10/200',
+            },].concat(listOfItems)
+        },
+        {
+            title: 'Март',
+            horizontal: false,
+            data: [
+              {
+                key: '1',
+                text: 'Item text 1',
+                uri: 'https://picsum.photos/id/1/200',
+              },
+              {
+                key: '2',
+                text: 'Item text 2',
+                uri: 'https://picsum.photos/id/10/200',
+              },]
+          },
+    ];
+
     return (
      <View style={globalStyle.fill}>
       <SafeAreaView style={globalStyle.main_view}>
@@ -70,44 +138,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const SECTIONS = [
-    {
-      title: 'Февраль',
-      horizontal: false,
-      data: [
-        {
-          key: '1',
-          text: ' \«Лопни лженауку\»',
-          type: 'Научный челлендж',
-          when: 'В течении Февраля',
-          description: 'Описание события',
-          uri: 'https://picsum.photos/id/1/200',
-        },
-        {
-          key: '2',
-          text: 'Item text 2',
-          type: 'Научный челлендж',
-          when: '10.02',
-          description: 'Описание события',
-          uri: 'https://picsum.photos/id/10/200',
-        },]
-    },
-    {
-        title: 'Март',
-        horizontal: false,
-        data: [
-          {
-            key: '1',
-            text: 'Item text 1',
-            uri: 'https://picsum.photos/id/1/200',
-          },
-          {
-            key: '2',
-            text: 'Item text 2',
-            uri: 'https://picsum.photos/id/10/200',
-          },]
-      },
-];
+
 
 const style = StyleSheet.create({
     
