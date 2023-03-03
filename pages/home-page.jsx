@@ -39,7 +39,7 @@ export default function HomePage({navigation}) {
         return unsubscribe;
       }, [navigation]);
 
-    async function getMoviesFromApi() {
+    async function getEventsFromApi() {
 
         try {
           let response = await fetch('http://localhost:8888/request-events.php');
@@ -106,7 +106,7 @@ export default function HomePage({navigation}) {
                 <Image source={{uri: getUserImage()}} style={styles.userImage}/>
             </View>
             <Text style={[globalStyle.text,{flexBasis: '50%', paddingTop: 10, textAlign: 'left'}]}>UserName</Text>
-            <NotificationButton style={{flexBasis: '10%', alignSelf: 'flex-start'}} onPress={() => getMoviesFromApi()}/>
+            <NotificationButton style={{flexBasis: '10%', alignSelf: 'flex-start'}} onPress={() => getEventsFromApi()}/>
             <ImageButton imageStyle={{height: 50, width:50 }} source={require('../assets/settings.png')} onPress={()=> navigation.navigate('Settings')} style={{flexBasis: '10%', paddingTop: 5, marginLeft: 20}}/>
         </View>
 
